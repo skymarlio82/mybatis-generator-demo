@@ -1,6 +1,7 @@
 
 package com.wiz.test.demo.web.controller;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.wiz.test.demo.data.dao.TUserMapper;
 import com.wiz.test.demo.data.entity.TUser;
+import com.wiz.test.demo.data.entity.TUserExample;
 import com.wiz.test.demo.web.form.LoginForm;
 import com.wiz.test.demo.web.model.LoginResult;
 
@@ -44,8 +46,8 @@ public class TestApiController {
 	@RequestMapping(value="/hi", method=RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	public TUser hi() {
-		TUser user = tUserMapper.selectOneByExample(null);
-		return user;
+	public List<TUser> hi() {
+		List<TUser> users = tUserMapper.selectByExample((new TUserExample()).or().andUserNameBetween("test1", "test2").example().orderBy("phone"));
+		return users;
 	}
 }

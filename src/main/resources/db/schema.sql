@@ -1,3 +1,4 @@
+
 CREATE DATABASE `test01`;
 
 CREATE TABLE `t_user` (
