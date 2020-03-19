@@ -47,7 +47,7 @@ public class TestApiController {
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public List<TUser> hi() {
-		List<TUser> users = tUserMapper.selectByExample((new TUserExample()).or().andUserNameBetween("test1", "test2").example().orderBy("phone"));
+		List<TUser> users = tUserMapper.selectByExample((new TUserExample()).or().andUserNameBetween("test1", "test2").example().orderBy(TUser.Column.phone.asc()));
 		return users;
 	}
 }
