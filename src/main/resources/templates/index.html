@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>WxPayMent</title>
+	</head>
+	<body>
+		<span>支付请求信息如下：</span>
+		<div>
+			<input id="appId" type="text" th:value="${appId}">
+			<br><br>
+			<input id="nonceStr" type="text" th:value="${nonceStr}">
+			<br><br>
+			<input id="package" type="text" th:value="${package}">
+			<br><br>
+			<input id="paySign" type="text" th:value="${paySign}">
+			<br><br>
+			<input id="signType" type="text" th:value="${signType}">
+			<br><br>
+			<input id="timeStamp" type="text" th:value="${timeStamp}">
+			<br><br>
+			<input type="button" value="请手动点击支付" onclick="jsApiCall();">
+		</div>
+	</body>
+	<script type="text/javascript">
+		var getBrandWCPayRequest = {};
+		function jsApiCall() {
+			getBrandWCPayRequest = {
+				appId: document.getElementById("appId").value,
+				nonceStr: document.getElementById("nonceStr").value,
+				package: document.getElementById("package").value,
+				paySign: document.getElementById("paySign").value,
+				signType: document.getElementById("signType").value,
+				timeStamp: document.getElementById("timeStamp").value
+			};
+			console.log(getBrandWCPayRequest);
+			WeixinJSBridge.invoke('getBrandWCPayRequest', getBrandWCPayRequest,
+				function (res) {
+					WeixinJSBridge.log(res.err_msg);
+					alert(res.err_code + res.err_desc + res.err_msg);
+				}
+			);
+		}
+	</script>
+</html>
